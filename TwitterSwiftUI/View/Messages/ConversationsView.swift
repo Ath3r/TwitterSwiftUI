@@ -49,9 +49,9 @@ struct ConversationsView: View {
                     .clipShape(Circle())
                     .padding()
             }
-            .sheet(isPresented: $isShowingNewMessageView, content: {
+            .sheet(isPresented: $isShowingNewMessageView) {
                 NewMessageView(startChat: $showChat, show: $isShowingNewMessageView)
-            })
+            }
             
         }
         

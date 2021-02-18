@@ -9,7 +9,48 @@ import SwiftUI
 
 struct ProfileHeaderView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Image("batman")
+                .resizable()
+                .scaledToFill()
+                .clipped()
+                .frame(width: 120, height: 120)
+                .cornerRadius(60)
+                .shadow(radius: 10)
+            Text("Bruce Wayne")
+                .font(.system(size:16, weight: .semibold))
+                .padding(.top,8)
+            
+            Text("@batman")
+                .font(.subheadline)
+                .foregroundColor(.gray)
+            
+            Text("Your bio goes here")
+                .font(.system(size: 14))
+                .padding(.top,8)
+            
+            HStack(spacing: 42){
+                
+                VStack{
+                    Text("1")
+                        .font(.system(size:16, weight: .bold))
+                    Text("Followers")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
+                VStack{
+                    Text("1")
+                        .font(.system(size:16, weight: .bold))
+                    Text("Following")
+                        .font(.footnote)
+                        .foregroundColor(.gray)
+                }
+            }
+            .padding()
+            ProfileActionButtonView(isCurrnetUser: false)
+            Spacer()
+            
+        }
     }
 }
 
