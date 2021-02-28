@@ -17,6 +17,7 @@ struct RegistrationView: View {
     @State var image: Image?
     @State var imagePickerShown = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
+    @ObservedObject var viewModel = AuthViewModel()
     
     func loadImage() {
         guard let selectedImage = selectedImage else {return}
@@ -106,7 +107,9 @@ struct RegistrationView: View {
                 }
                 
                 Button(action:{
-                
+                    guard let image = self.selectedImage else { return }
+                    viewModel.registerUser(email: self.email, password: self.password, username: self.password, fullname: self.fullname, profileImage: image)
+                    
                 }){
                     Text("Sign Up")
                         .foregroundColor(.blue)
