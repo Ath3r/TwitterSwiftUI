@@ -10,15 +10,15 @@ import SwiftUI
 
 enum TweetFilerOptions: Int, CaseIterable{
     case tweets
-    case replies
+//    case replies
     case likes
     
     var title:String{
         switch self{
         case .tweets:
            return "Tweets"
-        case .replies:
-          return  "Tweets & Replies"
+//        case .replies:
+//          return  "Tweets & Replies"
         case .likes:
           return  "Likes"
         }
@@ -66,11 +66,5 @@ struct FilterButtonView: View {
                 .padding(.leading,padding)
                 .animation(.spring())
         }
-    }
-}
-
-struct FilterButtonView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterButtonView(option: .constant(.likes))
     }
 }

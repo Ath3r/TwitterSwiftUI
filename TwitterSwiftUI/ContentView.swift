@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ContentView: View {
     
@@ -15,39 +16,26 @@ struct ContentView: View {
         Group{
             if viewModel.userSession != nil {
                 NavigationView {
-                    
-                    TabView{
-                        FeedView()
-                            .tabItem{
-                                Image(systemName: "house")
-                                Text("Home")
+                    MainViews()
+                        .navigationBarTitle("Home", displayMode: .inline)
+                        .navigationBarItems(leading: Button(action: {
+                            viewModel.signout()
+                        }, label: {
+                            if let user = viewModel.user {
+                                KFImage(URL(string: user.profileImageUrl))
+                                    .resizable()
+                                    .scaledToFill()
+                                    .clipped()
+                                    .frame(width: 32, height: 32)
+                                    .cornerRadius(16)
                             }
-                        
-                        SearchView()
-                            .tabItem{
-                                Image(systemName: "magnifyingglass")
-                                Text("Search")
-                            }
-                        
-                        ConversationsView()
-                            .tabItem{
-                                Image(systemName: "envelope")
-                                Text("Messages")
-                            }
-                    }
-                    
-                    .navigationBarTitle("Home", displayMode: .inline)
+                        }))
                                 
                 }
+                .navigationViewStyle(StackNavigationViewStyle())
             } else{
                 LoginView()
             }
         }
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

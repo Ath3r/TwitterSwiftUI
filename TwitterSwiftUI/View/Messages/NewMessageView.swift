@@ -13,6 +13,8 @@ struct NewMessageView: View {
     @State var searchText: String = ""
     @Binding var startChat: Bool
     @Binding var show: Bool
+    @ObservedObject var viewModel = SearchViewModel()
+
     
     var body: some View {
         
@@ -21,12 +23,12 @@ struct NewMessageView: View {
                 .padding()
             
             VStack(alignment: .leading){
-                ForEach(0..<10) {  _ in
+                ForEach(viewModel.users) {  user in
                     Button(action: {
                         self.show.toggle()
                         self.startChat.toggle()
                     }, label: {
-                        UserCell()
+                        UserCell(user: user)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                             .foregroundColor(.black)
                     })

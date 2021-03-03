@@ -10,6 +10,8 @@ import SwiftUI
 struct SearchView: View {
     
     @State var searchText: String = ""
+    @ObservedObject var viewModel = SearchViewModel()
+    
     
     var body: some View {
         
@@ -18,12 +20,12 @@ struct SearchView: View {
                 .padding()
             
             VStack(alignment: .leading){
-                ForEach(0..<10) {  _ in
+                ForEach(viewModel.users) {  user in
                     
                     NavigationLink(
-                        destination: UserProfileView(),
+                        destination: LazyView(UserProfileView(user: user)),
                         label: {
-                            UserCell()
+                            UserCell(user: user)
                                 .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
                         })
                     
@@ -33,11 +35,5 @@ struct SearchView: View {
             }
             
         }
-    }
-}
-
-struct SearchView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchView()
     }
 }

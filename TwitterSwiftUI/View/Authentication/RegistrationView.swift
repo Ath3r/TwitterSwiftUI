@@ -17,7 +17,7 @@ struct RegistrationView: View {
     @State var image: Image?
     @State var imagePickerShown = false
     @Environment(\.presentationMode) var mode: Binding<PresentationMode>
-    @ObservedObject var viewModel = AuthViewModel()
+    @EnvironmentObject var viewModel: AuthViewModel
     
     func loadImage() {
         guard let selectedImage = selectedImage else {return}
@@ -89,22 +89,6 @@ struct RegistrationView: View {
                         .foregroundColor(.white)
                 }
                 .padding(.horizontal,32)
-                
-                HStack{
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        
-                    }) {
-                        Text("Forgot Password?")
-                            .font(.footnote)
-                            .bold()
-                            .foregroundColor(.white)
-                            .padding(.top, 8)
-                            .padding(.trailing, 32)
-                    }
-                }
                 
                 Button(action:{
                     guard let image = self.selectedImage else { return }

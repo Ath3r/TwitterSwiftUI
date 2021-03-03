@@ -6,22 +6,27 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 struct ProfileHeaderView: View {
+    @State var selectedFilter: TweetFilerOptions = .tweets
+    @ObservedObject var viewModel: ProfileViewModel
+    
     var body: some View {
+        
         VStack{
-            Image("batman")
+            KFImage(URL(string: viewModel.user.profileImageUrl))
                 .resizable()
                 .scaledToFill()
                 .clipped()
                 .frame(width: 120, height: 120)
                 .cornerRadius(60)
                 .shadow(radius: 10)
-            Text("Bruce Wayne")
+            Text(viewModel.user.fullname)
                 .font(.system(size:16, weight: .semibold))
                 .padding(.top,8)
             
-            Text("@batman")
+            Text("@\(viewModel.user.username)")
                 .font(.subheadline)
                 .foregroundColor(.gray)
             
@@ -32,14 +37,14 @@ struct ProfileHeaderView: View {
             HStack(spacing: 42){
                 
                 VStack{
-                    Text("1")
+                    Text("\(viewModel.user.stats.followers)")
                         .font(.system(size:16, weight: .bold))
                     Text("Followers")
                         .font(.footnote)
                         .foregroundColor(.gray)
                 }
                 VStack{
-                    Text("1")
+                    Text("\(viewModel.user.stats.following)")
                         .font(.system(size:16, weight: .bold))
                     Text("Following")
                         .font(.footnote)
@@ -47,15 +52,10 @@ struct ProfileHeaderView: View {
                 }
             }
             .padding()
-            ProfileActionButtonView(isCurrnetUser: false)
-            Spacer()
+            ProfileActionButtonView(viewModel: viewModel)
             
+            Spacer()
         }
     }
-}
 
-struct ProfileHeaderView_Previews: PreviewProvider {
-    static var previews: some View {
-        ProfileHeaderView()
-    }
 }
