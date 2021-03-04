@@ -30,7 +30,7 @@ struct TweetCell: View {
                             .font(.system(size: 14))
                             .foregroundColor(.gray)
                         
-                        Text("2w")
+                        Text(tweet.timestampString)
                             .foregroundColor(.gray)
                     }
                     HStack{

@@ -11,13 +11,14 @@ import Kingfisher
 struct ContentView: View {
     
     @EnvironmentObject var viewModel: AuthViewModel
+    @State private var selectedIndex = 0
     
     var body: some View {
         Group{
             if viewModel.userSession != nil {
                 NavigationView {
-                    MainViews()
-                        .navigationBarTitle("Home", displayMode: .inline)
+                    MainViews(selectedIndex: $selectedIndex)
+                        .navigationBarTitle(viewModel.tabTitle(forIndex: selectedIndex), displayMode: .inline)
                         .navigationBarItems(leading: Button(action: {
                             viewModel.signout()
                         }, label: {

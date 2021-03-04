@@ -10,7 +10,7 @@ import SwiftUI
 struct SearchView: View {
     
     @State var searchText: String = ""
-    @ObservedObject var viewModel = SearchViewModel()
+    @ObservedObject var viewModel = SearchViewModel(config: .search)
     
     
     var body: some View {
@@ -20,7 +20,7 @@ struct SearchView: View {
                 .padding()
             
             VStack(alignment: .leading){
-                ForEach(viewModel.users) {  user in
+                ForEach(searchText.isEmpty ? viewModel.users : viewModel.filterUsers(searchText)) {  user in
                     
                     NavigationLink(
                         destination: LazyView(UserProfileView(user: user)),
